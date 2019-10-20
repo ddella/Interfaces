@@ -1,7 +1,7 @@
  
 The function *get_mac_address* returns the MAC address of an Ethernet interface. The return value is six consecutive *uint8_t*.
 
-This module will compile on macOS and any modern Linux that has GCC compiler. It has been tested with macOS Catalina (10.15) and Linux Mint 19.2 (Kernel 4.15.0-62). *Please follow the instruction of your OS on how to install GCC*.
+This module will compile on macOS with clang LLVM compiler and any modern Linux that has GCC compiler. It has been tested with macOS Catalina (10.15) and Linux Mint 19.2 (Kernel 4.15.0-62). *Please follow the instruction of your OS on how to install a C compiler*.
 
 * To compile as a stand alone program, do **gcc -Wall get_if_mac.c -D__MAIN__ -o get_if_mac**.
 * To compile as an object file, do **gcc -Wall -c get_if_mac.c**.
