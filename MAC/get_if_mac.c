@@ -83,19 +83,16 @@
 			//memset(mac_addr, 0xff, ETHERNET_MAC_LEN);
 			if (getifaddrs(&iflist) == 0) {
 				for (cur = iflist; cur; cur = cur->ifa_next) {
-					if ((cur->ifa_addr->sa_family == AF_LINK) &&
+					if ((cur->ifa_addr->sa_family == AF_LINK) && 
 					(strcmp(cur->ifa_name, if_name) == 0) && cur->ifa_addr) {
 						sdl = (struct sockaddr_dl*)cur->ifa_addr;
 						/*Make sure we don't copy more than ETHERNET_MAC_LEN bytes,
 						  this condition should never happen */
-						if (sdl->sdl_alen != ETHERNET_MAC_LEN) {
-							found = EXIT_FAILURE;
-							break;
-						} else {
+						if (sdl->sdl_alen == ETHERNET_MAC_LEN) {
 							memcpy(mac_addr, LLADDR(sdl), sdl->sdl_alen);
 							found = EXIT_SUCCESS;
-							break;
 						}
+						break;
 					}
 				}
 				freeifaddrs(iflist);
