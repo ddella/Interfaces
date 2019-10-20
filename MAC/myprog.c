@@ -18,6 +18,5 @@ int result;
 	} else {
 		printf ("Error in get_mac_address with interface %s\n", argv[1]);
 	}
-
 	return EXIT_SUCCESS;
 }
