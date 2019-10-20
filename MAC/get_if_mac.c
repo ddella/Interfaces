@@ -11,6 +11,7 @@
  * Based on the following articles.
  * @see http://nadeausoftware.com/articles/2012/01/c_c_tip_how_use_compiler_predefined_macros_detect_operating_system#OSXiOSandDarwin
  * @see https://stackoverflow.com/questions/3964494/having-a-problem-figuring-out-how-to-get-ethernet-interface-info-on-mac-os-x-usi
+ * @see https://stackoverflow.com/questions/6762766/mac-address-with-getifaddrs
  *
  * Compile & Execute
  * =================
