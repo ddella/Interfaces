@@ -8,7 +8,7 @@ int result;
 
 	if (argc != 2) {
 		fprintf(stderr, "Usage: %s <interface name>\n", argv[0]);
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	result = get_mac_address (&mac_addr, argv[1]);
@@ -19,5 +19,5 @@ int result;
 		printf ("Error in get_mac_address with interface %s\n", argv[1]);
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
