@@ -7,10 +7,17 @@ This module will compile on macOS and any modern Linux that has GCC compiler. It
 * To compile as an object file, do **gcc -Wall -c get_if_mac.c**.
 * If compiled as a stand alone program, simply call it with one argument that is the string of the Ethernet interface:  **./get_if_mac eth0**. It will print something like **get_mac_address: aa:bb:cc:dd:ee:ff**.
 
-The function *get_mac_address* returns a MAC address as eight consecutive *uint8_t*.
- 
+The function *get_mac_address* takes two arguments:
+* A pointer to a struct mac_addr. This is an output parameter. It will be filled with the MAC address, if the function succeeds.
+* A string of characters that represents the interface I want the MAC address, ex: "eth0".
+
+The functions return either **EXIT_SUCCESS** or **EXIT_FAILURE**.
+
 ```
+int get_mac_address (struct mac_addr *, const char *)
+
 // Simple structure for the Ethernet MAC address
 struct mac_addr {
    uint8_t byte[ETHERNET_MAC_LEN];
 };
+```
