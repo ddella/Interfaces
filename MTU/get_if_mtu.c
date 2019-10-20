@@ -58,11 +58,10 @@
 	#elif TARGET_OS_IPHONE
 		// define something for iphone  
 	#else
-/** @brief This function returns the MAC address of an Ethernet interface.
+/** @brief This function returns the MTU of an interface.
  *  The interface is passed in paranmeter as a string.
  *
- *  @param mac_addr:	The MAC address of the interface. Undefined if an error occured.
- *		The MAC address is return in a simple structure of 6 uint8_t bytes.
+ *  @param mtu:		The MTU of the interface. Undefined if an error occured.
  *  @param if_name:	The string of the interface name, ex: "en0", "eth0"
  *
  *  @return returns EXIT_SUCCESS if successful
