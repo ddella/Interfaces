@@ -1,5 +1,5 @@
  
-The function *get_mac_address*, returns the MAC address of an Ethernet interface.
+The function *get_mac_address* returns the MAC address of an Ethernet interface. The return value is six consecutive *uint8_t*.
 
 This module will compile on macOS and any modern Linux that has GCC compiler. It has been tested with macOS Catalina (10.15) and Linux Mint 19.2 (Kernel 4.15.0-62). *Please follow the instruction of your OS on how to install GCC*.
 
