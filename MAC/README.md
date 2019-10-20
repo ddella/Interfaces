@@ -9,8 +9,8 @@ This module will compile on macOS and any modern Linux that has GCC compiler. It
 
 The function *get_mac_address* returns a MAC address as eight consecutive *uint8_t*.
  
-`// Simple structure for the Ethernet MAC address
+```// Simple structure for the Ethernet MAC address
 
 struct mac_addr {
    uint8_t byte[ETHERNET_MAC_LEN];
-};`
+};```
