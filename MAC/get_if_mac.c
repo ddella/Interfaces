@@ -69,7 +69,7 @@
  *  @return returns EXIT_FAILURE if NOT successful
  */
 		int get_mac_address (struct mac_addr *mac_addr, const char *if_name) {
-		struct ifaddrs* iflist;
+		struct ifaddrs *iflist;
 		struct sockaddr_dl *sdl;
 		struct ifaddrs *cur;
 		int found = EXIT_FAILURE;
