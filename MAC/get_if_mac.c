@@ -9,7 +9,8 @@
  * Tested with macOS Catalina (10.15) and Linux Mint 19.2 (Kernel 4.15.0-62)
  *
  * Based on the following articles.
- * @see http://
+ * @see http://nadeausoftware.com/articles/2012/01/c_c_tip_how_use_compiler_predefined_macros_detect_operating_system#OSXiOSandDarwin
+ * @see https://stackoverflow.com/questions/3964494/having-a-problem-figuring-out-how-to-get-ethernet-interface-info-on-mac-os-x-usi
  *
  * Compile & Execute
  * =================
@@ -78,14 +79,14 @@
 				return (EXIT_FAILURE);
 			}
 
-			//This way, the struct would be defined in case of error.
+			//This way, the struct would be defined in case of error!
 			//memset(mac_addr, 0xff, ETHERNET_MAC_LEN);
 			if (getifaddrs(&iflist) == 0) {
 				for (cur = iflist; cur; cur = cur->ifa_next) {
 					if ((cur->ifa_addr->sa_family == AF_LINK) &&
 					(strcmp(cur->ifa_name, if_name) == 0) && cur->ifa_addr) {
 						sdl = (struct sockaddr_dl*)cur->ifa_addr;
-						/*Make sure we don't copy more than ETHERNET_MAC_LEN bytes
+						/*Make sure we don't copy more than ETHERNET_MAC_LEN bytes,
 						  this condition should never happen */
 						if (sdl->sdl_alen != ETHERNET_MAC_LEN) {
 							found = EXIT_FAILURE;
