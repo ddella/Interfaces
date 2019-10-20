@@ -21,7 +21,7 @@
  * gcc -Wall -c get_if_mac.c
  *
  * To execute, open a shell and type
- * ./get_if_mac en0
+ * ./get_if_mac eth0
  *
 */
 
