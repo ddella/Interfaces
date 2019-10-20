@@ -10,7 +10,7 @@ This module will compile on macOS and any modern Linux that has GCC compiler. It
 
 The function *get_mac_address* takes two arguments, see at the end for the function prototype:
 * A pointer to a ```struct mac_addr```. This is an output parameter. It will be filled, by the function, with the MAC address, if it succeeds.
-* A string of characters that represents the interface name I want the MAC address, ex: "eth0".
+* A string that represents the interface name I want the MAC address, ex: "eth0".
 
 The function returns either **EXIT_SUCCESS** or **EXIT_FAILURE**.
 
