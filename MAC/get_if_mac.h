@@ -15,7 +15,7 @@ struct mac_addr {
 };
 
 	/************************************************/
-	/***           Function prototype             ***/
+	/***          Functions prototype             ***/
 	/************************************************/
 
 int get_mac_address (struct mac_addr *, const char *);
