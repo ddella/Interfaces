@@ -9,8 +9,7 @@
  * Tested with macOS Catalina (10.15) and Linux Mint 19.2 (Kernel 4.15.0-62)
  *
  * Based on the following articles.
- * @see 
- * @see 
+ * @see https://stackoverflow.com/questions/4951257/using-c-code-to-get-same-info-as-ifconfig
  *
  * Compile & Execute
  * =================
@@ -26,38 +25,16 @@
  *
 */
 
-#include <sys/sysctl.h>
 #include <net/if.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
-#ifdef __APPLE__
-	#include <net/if_dl.h>
-#endif
-#include <ifaddrs.h>
-#include <sys/types.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
 #include <stdint.h>
+#include <sys/types.h>
 
-#ifdef __linux
-	#include <stdint.h>
-	#include <sys/ioctl.h>
-	#include <unistd.h>
-#endif
-
-//#include "get_if_mac.h"
-
-#ifdef _WIN64
-   //define something for Windows (64-bit)
-#elif _WIN32
-   //define something for Windows (32-bit)
-#elif __APPLE__
-	#include "TargetConditionals.h"
-	#if TARGET_OS_IPHONE && TARGET_IPHONE_SIMULATOR
-		// define something for simulator   
-	#elif TARGET_OS_IPHONE
-		// define something for iphone  
-	#else
 /** @brief This function returns the MTU of an interface.
  *  The interface is passed in paranmeter as a string.
  *
@@ -67,41 +44,32 @@
  *  @return returns EXIT_SUCCESS if successful
  *  @return returns EXIT_FAILURE if NOT successful
  */
-	int get_if_mtu (uint32_t *mtu, char *if_name) {
+int get_if_mtu (uint32_t *mtu, char *if_name) {
+	int fd;
+	struct ifreq ifr;
+	int status = EXIT_FAILURE;
+
+	if (strlen (if_name) > IFNAMSIZ) {
+//		fprintf (stderr, "get_if_mtu: interface name > %u", IFNAMSIZ);
 		return (EXIT_FAILURE);
 	}
-	#endif
-#elif __linux
-	int get_if_mtu (uint32_t *mtu, char *if_name) {
-		int fd;
-		struct ifreq ifr;
-	
-		if (strlen (if_name) > IFNAMSIZ) {
-//			fprintf (stderr, "get_if_mtu: interface name > %u", IFNAMSIZ);
-			return (EXIT_FAILURE);
-		}
 
-		fd = socket (AF_INET, SOCK_DGRAM, 0);
-		if (fd < 0) {
-//			perror("get_if_mtu: socket failed");
-			return (EXIT_FAILURE);
-		}
-
-		ifr.ifr_addr.sa_family = AF_INET;
-		strncpy(ifr.ifr_name, if_name, sizeof(ifr.ifr_name));
-
-		if (ioctl(fd, SIOCGIFMTU, &ifr) == 0) {
-			*mtu = ifr.ifr_mtu;
-			close(fd);
-			return (EXIT_SUCCESS);
-		}
+	fd = socket (AF_INET, SOCK_DGRAM, 0);
+	if (fd < 0) {
+//		perror("get_if_mtu: socket failed");
 		return (EXIT_FAILURE);
 	}
-#elif __unix // all unices not caught above
-    // Unix
-#elif __posix
-    // POSIX
-#endif
+
+	ifr.ifr_addr.sa_family = AF_INET;
+	strncpy(ifr.ifr_name, if_name, sizeof(ifr.ifr_name));
+
+	if (ioctl(fd, SIOCGIFMTU, &ifr) == 0) {
+		*mtu = ifr.ifr_mtu;
+		status = EXIT_SUCCESS;
+	}
+	close(fd);
+	return (status);
+}
 
 #ifdef __MAIN__
 int main(int argc, char *argv[]) {
