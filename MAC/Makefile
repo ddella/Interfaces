@@ -8,11 +8,11 @@ CXXFLAGS = -Wall
 
 all: myprog
 
-object: get_if_mac.c get_if_mac.h
-	$(CC) $(CXXFLAGS) -c $<
-
-myprog: get_if_mac.c myprog.c
+myprog: get_if_mac.o myprog.c
 	$(CC) $(CXXFLAGS) -o $@ $^
+
+get_if_mac.o: get_if_mac.c get_if_mac.h
+	$(CC) $(CXXFLAGS) -c $<
 
 clean:
 	rm -f *.o myprog
