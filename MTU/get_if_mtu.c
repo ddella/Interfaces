@@ -34,6 +34,7 @@
 #include <sys/ioctl.h>
 #include <stdint.h>
 #include <sys/types.h>
+#include "get_if_mtu.h"
 
 /** @brief This function returns the MTU of an interface.
  *  The interface is passed in paranmeter as a string.
@@ -44,7 +45,7 @@
  *  @return returns EXIT_SUCCESS if successful
  *  @return returns EXIT_FAILURE if NOT successful
  */
-int get_if_mtu (uint32_t *mtu, char *if_name) {
+int get_if_mtu (uint32_t *mtu, const char *if_name) {
 	int fd;
 	struct ifreq ifr;
 	int status = EXIT_FAILURE;
